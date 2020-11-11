@@ -1,0 +1,12 @@
+{
+  "name": "graphql-delegate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Michael Copland <mjbcopland@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@graphql-tools/delegate": "^7.0.5",
+    "@graphql-tools/schema": "^7.0.0",
+    "graphql": "^15.4.0"
+  }
+}
