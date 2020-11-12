@@ -7,6 +7,7 @@
   "dependencies": {
     "@graphql-tools/delegate": "^7.0.5",
     "@graphql-tools/schema": "^7.0.0",
+    "@graphql-tools/wrap": "^7.0.1",
     "graphql": "^15.4.0"
   }
 }

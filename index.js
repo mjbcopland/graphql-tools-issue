@@ -1,5 +1,6 @@
 const { graphqlSync, GraphQLEnumType, GraphQLObjectType, GraphQLSchema } = require("graphql");
 const { delegateToSchema } = require("@graphql-tools/delegate");
+const { TransformEnumValues } = require("@graphql-tools/wrap");
 
 const ONE = 1;
 
@@ -23,6 +24,17 @@ const subSchema = new GraphQLSchema({
   }),
 });
 
+// Transforms an enum to its internal value
+const enumValueTransformer = (typeName, externalValue, enumValueConfig) => {
+  return [enumValueConfig.value, enumValueConfig];
+};
+
+const transformEnumValues = new TransformEnumValues(enumValueTransformer);
+const transforms = [transformEnumValues];
+
+// Transform and discard; this loads schema into the transformer
+void transformEnumValues.transformSchema(subSchema);
+
 // Trivial schema which delegates to the sub-schema
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
@@ -38,6 +50,7 @@ const schema = new GraphQLSchema({
             args,
             context,
             info,
+            transforms,
           });
         },
       },
